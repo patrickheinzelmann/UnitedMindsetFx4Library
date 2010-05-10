@@ -5,9 +5,9 @@
     <classEntry path="com.unitedmindset.components.PromptingTextArea"/>
     <classEntry path="com.unitedmindset.components.PromptingTextInput"/>
     <classEntry path="com.unitedmindset.core.unitedmindset"/>
-    <classEntry path="com.unitedmindset.skins.components.DefaultAutocompleteListSkin"/>
-    <classEntry path="com.unitedmindset.skins.components.DefaultPromptingTextAreaSkin"/>
-    <classEntry path="com.unitedmindset.skins.components.DefaultPromptingTextInputSkin"/>
+    <classEntry path="com.unitedmindset.skins.DefaultAutocompleteListSkin"/>
+    <classEntry path="com.unitedmindset.skins.DefaultPromptingTextAreaSkin"/>
+    <classEntry path="com.unitedmindset.skins.DefaultPromptingTextInputSkin"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests>
