@@ -1,0 +1,17 @@
+/* CSS file */
+@namespace unitedmindset "library://ns.unitedmindset.com";
+
+unitedmindset|AutocompleteList
+{
+	skin-class: new ClassFactory("com.unitedmindset.skins.components.DefaultAutocompleteListSkin");
+}
+
+unitedmindset|PromptingTextArea
+{
+	skin-class: new ClassFactory("com.unitedmindset.skins.components.DefaultPromptingTextAreaSkin");
+}
+
+unitedmindset|PromptingTextInput
+{
+	skin-class: new ClassFactory("com.unitedmindset.skins.components.DefaultPromptingTextInputSkin");
+}
