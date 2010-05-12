@@ -26,10 +26,21 @@ package com.unitedmindset.components
 	import spark.events.TextOperationEvent;
 	import spark.utils.LabelUtil;
 	
+	/**
+	 * Fired when the compareLabel is changed. 
+	 */	
 	[Event(name="compareLabelChange",type="flash.events.Event")]
+	/**
+	 * Fired when the compareFunction is changed. 
+	 */	
 	[Event(name="compareFunctionChange",type="flash.events.Event")]
-	
+	/**
+	 * Fired when the list opens. 
+	 */	
 	[Event(name="open", type="spark.events.DropDownEvent")]
+	/**
+	 * Fired when the list closes. 
+	 */	
 	[Event(name="close", type="spark.events.DropDownEvent")]
 	
 	[SkinState("open")]
