@@ -194,16 +194,9 @@ package com.unitedmindset.components
 		private var _oldDataProvider:IList;
 		
 		/**
-		 *  Overrides the inherited default property , it is true for this class.
-		 * 
-		 *  Sets the value of the <code>useVirtualLayout</code> property
-		 *  of the layout associated with this control.  
-		 *  If the layout is subsequently replaced and the value of this 
-		 *  property is <code>true</code>, then the new layout's 
-		 *  <code>useVirtualLayout</code> property is set to <code>true</code>.
+		 *  Makes sure to wrap the dataprovider in an ICollection
+		 *  implementation so that we have filterFunction ability.
 		 *
-		 *  @default true
-		 *  
 		 *  @langversion 3.0
 		 *  @playerversion Flash 10
 		 *  @playerversion AIR 1.5
