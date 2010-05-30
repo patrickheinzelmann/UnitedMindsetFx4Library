@@ -3,15 +3,15 @@
 
 unitedmindset|AutocompleteList
 {
-	skinClass: ClassReference("com.unitedmindset.skins.DefaultAutocompleteListSkin");
+	skinClass: ClassReference("com.unitedmindset.skins.AutocompleteListSkin");
 }
 
 unitedmindset|PromptingTextArea
 {
-	skinClass: ClassReference("com.unitedmindset.skins.DefaultPromptingTextAreaSkin");
+	skinClass: ClassReference("com.unitedmindset.skins.PromptingTextAreaSkin");
 }
 
 unitedmindset|PromptingTextInput
 {
-	skinClass: ClassReference("com.unitedmindset.skins.DefaultPromptingTextInputSkin");
+	skinClass: ClassReference("com.unitedmindset.skins.PromptingTextInputSkin");
 }
