@@ -8,6 +8,14 @@ package com.unitedmindset.components
 	import spark.components.TextArea;
 	import spark.events.TextOperationEvent;
 	
+	/**
+	 * Fired when the prompt changes. 
+	 */	
+	[Event(name="promptChange",type="flash.events.Event")]
+	
+	[SkinState("normalAndPrompted")]
+	[SkinState("disabledAndPrompted")]
+	
 	public class PromptingTextArea extends TextArea
 	{
 		public static const PROMPT_CHANGE_EVENT:String = "promptChange";

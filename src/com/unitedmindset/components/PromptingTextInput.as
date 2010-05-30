@@ -9,6 +9,9 @@ package com.unitedmindset.components
 	import spark.components.supportClasses.SkinnableTextBase;
 	import spark.events.TextOperationEvent;
 	
+	/**
+	 * Fired when the prompt changes. 
+	 */
 	[Event(name="promptChange",type="flash.events.Event")]
 	
 	[SkinState("normalAndPrompted")]
