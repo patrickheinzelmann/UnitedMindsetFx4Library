@@ -380,8 +380,6 @@ package com.unitedmindset.components
 		{
 			invalidateList();
 			evaluateList();
-			//if(textInput.text.length>0)
-			//	dropDownController.openDropDown();
 		}
 		
 		/**
@@ -532,7 +530,8 @@ package com.unitedmindset.components
 		 */	
 		private function _onFocusIn(event:FocusEvent):void
 		{
-			focusManager.setFocus(textInput);
+			if(textInput)
+				focusManager.setFocus(textInput);
 		}
 		
 		/**
