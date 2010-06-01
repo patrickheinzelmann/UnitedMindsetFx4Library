@@ -42,6 +42,17 @@ package com.unitedmindset.components
 	 * Fired when the list closes. 
 	 */	
 	[Event(name="close", type="spark.events.DropDownEvent")]
+	/**
+	 *  Dispatched after a user editing operation is complete.
+	 *
+	 *  @eventType spark.events.TextOperationEvent.CHANGE
+	 *  
+	 *  @langversion 3.0
+	 *  @playerversion Flash 10
+	 *  @playerversion AIR 1.5
+	 *  @productversion Flex 4
+	 */
+	[Event(name="change", type="spark.events.TextOperationEvent")]
 	
 	[SkinState("open")]
 	
@@ -378,6 +389,7 @@ package com.unitedmindset.components
 		 */
 		private function _onTextInput_TextChange(event:TextOperationEvent):void
 		{
+			dispatchEvent(event.clone());
 			invalidateList();
 			evaluateList();
 		}
@@ -531,7 +543,7 @@ package com.unitedmindset.components
 		private function _onFocusIn(event:FocusEvent):void
 		{
 			if(textInput)
-				focusManager.setFocus(textInput);
+				textInput.setFocus();
 		}
 		
 		/**
