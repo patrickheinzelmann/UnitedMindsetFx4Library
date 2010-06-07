@@ -1,5 +1,7 @@
 package com.unitedmindset.components
 {
+	import com.unitedmindset.events.AutocompleteListTextEvent;
+	
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
@@ -37,14 +39,27 @@ package com.unitedmindset.components
 	/**
 	 *  Dispatched after a user editing operation is complete.
 	 *
-	 *  @eventType spark.events.TextOperationEvent.CHANGE
+	 *  @eventType textChange
 	 *  
 	 *  @langversion 3.0
 	 *  @playerversion Flash 10
 	 *  @playerversion AIR 1.5
 	 *  @productversion Flex 4
 	 */
-	[Event(name="change", type="spark.events.TextOperationEvent")]
+	[Event(name="textChange", type="com.unitedmindset.events.AutocompleteListTextEvent")]
+	/**
+	 *  Dispatched before a user editing operation occurs.
+	 *  You can alter the operation, or cancel the event
+	 *  to prevent the operation from being processed.
+	 *
+	 *  @eventType spark.events.TextOperationEvent.CHANGING
+	 *  
+	 *  @langversion 3.0
+	 *  @playerversion Flash 10
+	 *  @playerversion AIR 1.5
+	 *  @productversion Flex 4
+	 */
+	[Event(name="textChanging", type="com.unitedmindset.events.AutocompleteListTextEvent")]
 	
 	[SkinState("open")]
 	
@@ -309,6 +324,7 @@ package com.unitedmindset.components
 			if(instance == textInput)
 			{
 				textInput.addEventListener(TextOperationEvent.CHANGE, _onTextInput_TextChange);
+				textInput.addEventListener(TextOperationEvent.CHANGING, _onTextInput_TextChanging);
 				textInput.addEventListener(FocusEvent.FOCUS_OUT, _onTextInput_FocusOutHandler);
 			}
 			else if (instance == dropDown && dropDownController)
@@ -332,9 +348,12 @@ package com.unitedmindset.components
 			
 			if(instance == textInput)
 			{
+				textInput.removeEventListener(TextOperationEvent.CHANGING, _onTextInput_TextChanging);
 				textInput.removeEventListener(TextOperationEvent.CHANGE, _onTextInput_TextChange);
 				textInput.removeEventListener(FocusEvent.FOCUS_OUT, _onTextInput_FocusOutHandler);
 			}
+import com.unitedmindset.events.AutocompleteListTextEvent;
+
 		}
 		
 		/**
@@ -381,9 +400,17 @@ package com.unitedmindset.components
 		 */
 		private function _onTextInput_TextChange(event:TextOperationEvent):void
 		{
-			dispatchEvent(event.clone());
+			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGE, event.bubbles, event.cancelable, event.operation));
 			invalidateList();
 			evaluateList();
+		}
+		
+		/**
+		 * @private
+		 */		
+		private function _onTextInput_TextChanging(event:TextOperationEvent):void
+		{
+			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGING, event.bubbles, event.cancelable, event.operation));
 		}
 		
 		/**
