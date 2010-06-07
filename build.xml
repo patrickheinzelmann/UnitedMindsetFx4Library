@@ -48,9 +48,9 @@
                 <publisher>UnitedMindset</publisher>
                 <language>EN</language>
             </metadata>
-            <arg line="-namespace library://ns.unitedmindset.com manifest.xml"/>
-            <arg line="-include-namespaces library://ns.unitedmindset.com"/>
-            <arg line="-include-file defaults.css defaults.css"/>
+            <arg line="-namespace ${NAMESPACE} ${MANIFEST_DIR}"/>
+            <arg line="-include-namespaces ${NAMESPACE}"/>
+            <include-file name="${DEFAULT_CSS_FILE}" path="${DEFAULT_CSS_DIR}"/>
 		</compc>
 	</target>
 	

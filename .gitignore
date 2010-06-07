@@ -17,8 +17,6 @@ profile
 
 #flexbuilder
 /bin-debug
-/bin
-**/bin
 /html-template
 .actionScriptProperties
 .flexProperties
