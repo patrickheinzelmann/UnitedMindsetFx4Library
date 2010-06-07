@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Build File" basedir="." default="build">
+	
+	<!-- file description -->
+	<description>Build Script</description>
+	
+	<!--location of property file -->
+	<property file="${basedir}/build.properties" description="your specific properities for builds" />
+	<property file="${basedir}/base.properties" description="base properities for builds" />
+	
+	<!-- additional tasks -->
+	<taskdef name="compc" classname="flex.ant.CompcTask" classpath="${FLEX_TASKS}"/>
+	<taskdef name="asdoc" classname="flex.ant.AsDocTask" classpath="${FLEX_TASKS}"/>
+    
+    <!--
+    
+    
+        Build
+    
+    
+    -->
+    
+	<target name="build" description="compiles application">
+		<antcall target="init"/>
+		<!--
+		<antcall target="compile"/>
+		-->
+		<antcall target="asdoc"/>
+	</target>
+	
+	<target name="compile"
+		description="Compiles the AIR application to a SWF file and places SWF in a temp directory to be packaged.">
+		<compc output="${RELEASE_DIR}/${LIBRARY_NAME}.swc"
+			locale="${LOCALE}"
+			debug="${DEBUG_FLAG}"
+			failonerror="true"
+			accessible="true">
+			<source-path path-element="${SOURCE_DIR}"/>
+			<external-library-path file="${FLEX_HOME}/frameworks/libs/air/airglobal.swc" append="true"/>
+			<library-path dir="${PROJECT_DIR}/libs" includes="*.swc" append="true"/>
+			<include-sources dir="${SOURCE_DIR}" includes="*"/>
+            <source-path path-element="${SOURCE_DIR}" />
+            <compiler.library-path dir="${LIBRARIES_DIR}" append="true">
+				<include name="*.swc" />
+			</compiler.library-path>
+            <metadata>
+                <creator>Jonathan Campos</creator>
+                <publisher>UnitedMindset</publisher>
+                <language>EN</language>
+            </metadata>
+            <arg line="-namespace library://ns.unitedmindset.com manifest.xml"/>
+            <arg line="-include-namespaces library://ns.unitedmindset.com"/>
+            <arg line="-include-file defaults.css defaults.css"/>
+		</compc>
+	</target>
+	
+	<target name="init" depends="clean"
+	description="Cleans the deploy file">
+		<mkdir dir="${RELEASE_DIR}"/>
+	</target>
+	
+	<target name="clean"
+		description="Cleans up old files.">
+		<delete dir="${RELEASE_DIR}" failOnError="false" includeEmptyDirs="true" />
+	</target>
+    
+    <!--
+    
+    
+        Asdocs
+    
+    
+    -->
+
+	<target name="cleanasdoc"
+		description="Delete the existing output folder and files and then regenerate the output folder">
+		<delete dir="${ASDOC_DIR}" failOnError="false" includeEmptyDirs="true"/>
+		<mkdir dir="${ASDOC_DIR}"/>
+	</target>
+
+	<target name="asdoc" depends="cleanasdoc"
+		description="Run the ASDoc executable and generate the ASDocs to the new output folder">
+        <exec executable="${ASDOC_EXE}" failonerror="false">
+            <arg line="-load-config '${FLEX_FRAMEWORKS}/flex-config.xml'"/>
+            <arg line="-doc-sources '${SOURCE_DIR}'"/>
+            <arg line="-doc-sources '${LIBRARIES_DIR}'"/>
+            <arg line="-main-title '${ASDOC_MAIN_TITLE}'"/>
+            <arg line="-window-title '${ASDOC_WINDOW_TITLE}'"/>
+            <arg line="-output '${ASDOC_DIR}'"/>
+            <arg line="-footer '${ASDOC_FOOTER}'"/>
+        </exec>
+    </target>
+	
+</project>

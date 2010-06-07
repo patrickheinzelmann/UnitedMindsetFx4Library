@@ -1,0 +1,6 @@
+<?xml version="1.0"?> 
+<componentPackage> 
+    <component id="AutocompleteList" class="com.unitedmindset.components.AutocompleteList"/> 
+    <component id="PromptingTextArea" class="com.unitedmindset.components.PromptingTextArea"/> 
+    <component id="PromptingTextInput" class="com.unitedmindset.components.PromptingTextInput"/> 
+</componentPackage>

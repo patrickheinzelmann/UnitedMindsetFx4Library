@@ -1,0 +1,17 @@
+/* CSS file */
+@namespace unitedmindset "library://ns.unitedmindset.com";
+
+unitedmindset|AutocompleteList
+{
+	skinClass: ClassReference("com.unitedmindset.skins.AutocompleteListSkin");
+}
+
+unitedmindset|PromptingTextArea
+{
+	skinClass: ClassReference("com.unitedmindset.skins.PromptingTextAreaSkin");
+}
+
+unitedmindset|PromptingTextInput
+{
+	skinClass: ClassReference("com.unitedmindset.skins.PromptingTextInputSkin");
+}
