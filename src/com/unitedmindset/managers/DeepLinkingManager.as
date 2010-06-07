@@ -88,7 +88,7 @@ package com.unitedmindset.managers
 			{
 				var parameters:Object = _initialParseFunction.call(null, url);
 				for (var name:String in parameters)
-					_navigationElements.push(new NavigationControl( name, null, null, false, parameters[name]));
+					_navigationElements.push(new NavigationControl( name, null, null, parameters[name]));
 			}
 		}
 		
@@ -158,7 +158,7 @@ package com.unitedmindset.managers
 				element.heldValue = property.toString();	
 				return;
 			}
-			if(element.isViewStack)
+			if(element.instance is ViewStack)
 			{
 				var index:int = int(property);
 				if(-1<index && index<ViewStack(element.instance).length)
@@ -247,7 +247,6 @@ package com.unitedmindset.managers
 				{
 					_navigationElements[i].instance = instance;
 					_navigationElements[i].property = property;
-					_navigationElements[i].isViewStack = (instance is ViewStack);
 					_navigationElements[i].defaultValue = defaultValue;
 					_setValue(_navigationElements[i], _navigationElements[i].heldValue);
 					found = true;
@@ -263,7 +262,7 @@ package com.unitedmindset.managers
 			} else {
 				// if not found
 				// register element
-				return _navigationElements.push(new NavigationControl(name, instance, property, (instance is ViewStack), null, defaultValue));
+				return _navigationElements.push(new NavigationControl(name, instance, property, null, defaultValue));
 			}
 		}
 		
@@ -457,18 +456,16 @@ class SingletonEnforcer{}
  */
 class NavigationControl
 {
-	public function NavigationControl(name:String, instance:UIComponent, property:String, isViewStack:Boolean=false, heldValue:String=null, defaultValue:Object=null)
+	public function NavigationControl(name:String, instance:UIComponent, property:String, heldValue:String=null, defaultValue:Object=null)
 	{
 		_name = name;
-		_instance = instance;
+		this.instance = instance;
 		this.property = property;
-		this.isViewStack = isViewStack;
 		this.heldValue = heldValue;
 		this.defaultValue = defaultValue;
 	}
 	
 	private var _name:String;
-	private var _instance:UIComponent;
 	/**
 	 * Default value to ignore when creating url.
 	 */	
@@ -478,14 +475,13 @@ class NavigationControl
 	 */	
 	public var property:String;
 	/**
-	 * If is ViewStack. 
-	 */	
-	public var isViewStack:Boolean;
-	/**
 	 * Held value for when the component is registered. 
 	 */	
 	public var heldValue:String;
-	
+	/**
+	 * UIComponent Instance.
+	 */	
+	public var instance:UIComponent;
 	/**
 	 * Name of the element, used for the name in the url.
 	 */	
@@ -494,20 +490,4 @@ class NavigationControl
 		return _name;
 	}
 	
-	/**
-	 * UIComponent Instance.
-	 */	
-	public function get instance():UIComponent
-	{
-		return _instance;
-	}
-	
-	/**
-	 * @private
-	 */	
-	public function set instance(value:UIComponent):void
-	{
-		_instance = value;
-		this.isViewStack = (_instance is ViewStack);
-	}
 }
