@@ -18,13 +18,14 @@ src/docs\
 \
 # osx noise\
 .DS_Store\
+**/.DS_Store\
 *.pbxuser\
 profile\
 \
 #flexbuilder\
-bin-debug\
-bin\
-html-template\
+/bin-debug\
+/bin\
+/html-template\
 .actionScriptProperties\
 .flexProperties\
 .project\
@@ -34,5 +35,6 @@ html-template\
 build.properties\
 \
 #ci stuff\
-reports/\
-release/}
+/reports\
+/asdoc\
+/release}
