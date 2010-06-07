@@ -11,6 +11,6 @@
   </includeClasses>
   <includeResources/>
   <namespaceManifests>
-    <namespaceManifestEntry manifest="manifest.xml" namespace="library://ns.unitedmindset.com"/>
+    <namespaceManifestEntry manifest="../manifest.xml" namespace="library://ns.unitedmindset.com"/>
   </namespaceManifests>
 </flexLibProperties>

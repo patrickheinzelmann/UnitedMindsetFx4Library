@@ -16,6 +16,11 @@ package com.unitedmindset.components
 	[SkinState("normalAndPrompted")]
 	[SkinState("disabledAndPrompted")]
 	
+	/**
+	 * TextArea with Prompt ability. 
+	 * @author jonbcampos
+	 * 
+	 */
 	public class PromptingTextArea extends TextArea
 	{
 		public static const PROMPT_CHANGE_EVENT:String = "promptChange";

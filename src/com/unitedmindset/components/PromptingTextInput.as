@@ -17,6 +17,11 @@ package com.unitedmindset.components
 	[SkinState("normalAndPrompted")]
 	[SkinState("disabledAndPrompted")]
 	
+	/**
+	 * TextInput with Prompt ability. 
+	 * @author jonbcampos
+	 * 
+	 */	
 	public class PromptingTextInput extends TextInput
 	{
 		public static const PROMPT_CHANGE_EVENT:String = "promptChange";
