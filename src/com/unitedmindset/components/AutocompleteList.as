@@ -27,14 +27,6 @@ package com.unitedmindset.components
 	import spark.utils.LabelUtil;
 	
 	/**
-	 * Fired when the compareLabel is changed. 
-	 */	
-	[Event(name="compareLabelChange",type="flash.events.Event")]
-	/**
-	 * Fired when the compareFunction is changed. 
-	 */	
-	[Event(name="compareFunctionChange",type="flash.events.Event")]
-	/**
 	 * Fired when the list opens. 
 	 */	
 	[Event(name="open", type="spark.events.DropDownEvent")]
@@ -63,8 +55,8 @@ package com.unitedmindset.components
 	 */	
 	public class AutocompleteList extends List
 	{
-		public static const COMPARELABEL_CHANGE_EVENT:String = "compareLabelChange";
-		public static const COMPAREFUNCTION_CHANGE_EVENT:String = "compareFunctionChange";
+		private static const COMPARELABEL_CHANGE_EVENT:String = "compareLabelChange";
+		private static const COMPAREFUNCTION_CHANGE_EVENT:String = "compareFunctionChange";
 		
 		public function AutocompleteList()
 		{
