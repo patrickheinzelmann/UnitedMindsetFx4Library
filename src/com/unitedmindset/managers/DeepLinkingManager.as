@@ -2,6 +2,7 @@ package com.unitedmindset.managers
 {
 	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	
 	import mx.containers.ViewStack;
 	import mx.core.FlexGlobals;
@@ -185,6 +186,11 @@ package com.unitedmindset.managers
 				}
 			}
 		}
+		
+		private function _automaticUrlUpdate(event:Event):void
+		{
+			updateUrl();
+		}
 		//---------------------------------------------------------------------
 		//
 		//  Public Methods
@@ -234,7 +240,7 @@ package com.unitedmindset.managers
 		 * @param property
 		 * 
 		 */		
-		public function registerNavigationControl(name:String, instance:UIComponent, property:String, defaultValue:Object=null):int
+		public function registerNavigationControl(name:String, instance:UIComponent, property:String, defaultValue:Object=null, urlUpdateEvent:String=null):int
 		{
 			var i:int = -1;
 			var n:int = _navigationElements.length;
@@ -248,7 +254,9 @@ package com.unitedmindset.managers
 					_navigationElements[i].instance = instance;
 					_navigationElements[i].property = property;
 					_navigationElements[i].defaultValue = defaultValue;
+					_navigationElements[i].urlUpdateEvent = urlUpdateEvent;
 					_setValue(_navigationElements[i], _navigationElements[i].heldValue);
+					_navigationElements[i].instance.addEventListener(urlUpdateEvent, _automaticUrlUpdate);
 					found = true;
 					break;
 				}
@@ -262,17 +270,18 @@ package com.unitedmindset.managers
 			} else {
 				// if not found
 				// register element
-				return _navigationElements.push(new NavigationControl(name, instance, property, null, defaultValue));
+				if(urlUpdateEvent)
+					instance.addEventListener(urlUpdateEvent, _automaticUrlUpdate);
+				return _navigationElements.push(new NavigationControl(name, instance, property, null, defaultValue, urlUpdateEvent));
 			}
 		}
 		
 		/**
-		 * Unregisters a uicomponent from effecting the deep linking url. 
-		 * @param name
+		 * Unregisters a uicomponent from effecting the deep linking url by instance. 
 		 * @param instance
-		 * 
+		 * @return index
 		 */		
-		public function unRegisterNavigationControl(name:String, instance:UIComponent):int
+		public function unRegisterNavigationControl(instance:UIComponent):int
 		{
 			var i:int = -1;
 			var n:int = _navigationElements.length;
@@ -280,6 +289,30 @@ package com.unitedmindset.managers
 			{
 				if(_navigationElements[i].instance==instance)
 				{
+					if(_navigationElements[i].urlUpdateEvent && _navigationElements[i].instance.hasEventListener(_navigationElements[i].urlUpdateEvent))
+						_navigationElements[i].instance.removeEventListener(_navigationElements[i].urlUpdateEvent, _automaticUrlUpdate);
+					_navigationElements.splice(i,1);
+					break;
+				}
+			}
+			return _navigationElements.length;
+		}
+		
+		/**
+		 * Unregisters a uicomponent from effecting the deep linking url by name. 
+		 * @param name
+		 * @return index
+		 */		
+		public function unRegisterNavigationControlByName(name:String):int
+		{
+			var i:int = -1;
+			var n:int = _navigationElements.length;
+			while(++i<n)
+			{
+				if(_navigationElements[i].name==name)
+				{
+					if(_navigationElements[i].urlUpdateEvent && _navigationElements[i].instance.hasEventListener(_navigationElements[i].urlUpdateEvent))
+						_navigationElements[i].instance.removeEventListener(_navigationElements[i].urlUpdateEvent, _automaticUrlUpdate);
 					_navigationElements.splice(i,1);
 					break;
 				}
@@ -441,8 +474,11 @@ package com.unitedmindset.managers
 		}
 	}
 }
+import com.unitedmindset.managers.DeepLinkingManager;
+
 import mx.containers.ViewStack;
 import mx.core.UIComponent;
+
 /**
  * Singleton Enforcer. 
  * @author jonbcampos
@@ -456,13 +492,14 @@ class SingletonEnforcer{}
  */
 class NavigationControl
 {
-	public function NavigationControl(name:String, instance:UIComponent, property:String, heldValue:String=null, defaultValue:Object=null)
+	public function NavigationControl(name:String, instance:UIComponent, property:String, heldValue:String=null, defaultValue:Object=null, urlUpdateEvent:String=null)
 	{
 		_name = name;
 		this.instance = instance;
 		this.property = property;
 		this.heldValue = heldValue;
 		this.defaultValue = defaultValue;
+		this.urlUpdateEvent = urlUpdateEvent;
 	}
 	
 	private var _name:String;
@@ -482,6 +519,10 @@ class NavigationControl
 	 * UIComponent Instance.
 	 */	
 	public var instance:UIComponent;
+	/**
+	 * Event to listen for to trigger a url update. 
+	 */	
+	public var urlUpdateEvent:String;
 	/**
 	 * Name of the element, used for the name in the url.
 	 */	
