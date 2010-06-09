@@ -274,6 +274,9 @@ package com.unitedmindset.managers
 	
 	}
 }
-
-class SingletonEnforcer {
-}
+/**
+ * Singleton Enforcer. 
+ * @author jonbcampos
+ * 
+ */
+class SingletonEnforcer {}

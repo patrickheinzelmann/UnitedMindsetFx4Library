@@ -63,10 +63,6 @@ package com.unitedmindset.utils
 		 * Validates that an object that is an <code>Array</code> or an <code>ArrayCollection</code> is of a specific class type. 
 		 * This function only goes one level deep, not appropriate to check tree structures.
 		 * 
-		 * <pre>
-		 * Test Found In MMALibraryTest :: ClassValidationUtilTest.as
-		 * </pre>
-		 *  
 		 * @param objectToValidate
 		 * @param primaryClass a class to check the object against
 		 * @return <code>true</code> if the classes are equal type, <code>false</code> if they are not
@@ -104,10 +100,6 @@ package com.unitedmindset.utils
 		
 		/**
 		 * Validates that a tree objects nodes are all of a specific class type. Recursively checks all levels.
-		 * 
-		 * <pre>
-		 * Test Found In MMALibraryTest :: ClassValidationUtilTest.as
-		 * </pre>
 		 * 
 		 * @param objectToValidate
 		 * @param checkClass a class to check the object against, make sure they are of the same type.
