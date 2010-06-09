@@ -89,7 +89,11 @@ package com.unitedmindset.managers
 			{
 				var parameters:Object = _initialParseFunction.call(null, url);
 				for (var name:String in parameters)
-					_navigationElements.push(new NavigationControl( name, null, null, parameters[name]));
+				{
+					var element:NavigationControl = new NavigationControl(name);
+					element.defaultValue = parameters[name];
+					_navigationElements.push(element);
+				}
 			}
 		}
 		
@@ -272,7 +276,12 @@ package com.unitedmindset.managers
 				// register element
 				if(urlUpdateEvent)
 					instance.addEventListener(urlUpdateEvent, _automaticUrlUpdate);
-				return _navigationElements.push(new NavigationControl(name, instance, property, null, defaultValue, urlUpdateEvent));
+				var element:NavigationControl = new NavigationControl(name);
+				element.instance = instance;
+				element.property = property;
+				element.defaultValue = defaultValue;
+				element.urlUpdateEvent = urlUpdateEvent;
+				return _navigationElements.push(element);
 			}
 		}
 		
@@ -492,14 +501,9 @@ class SingletonEnforcer{}
  */
 class NavigationControl
 {
-	public function NavigationControl(name:String, instance:UIComponent, property:String, heldValue:String=null, defaultValue:Object=null, urlUpdateEvent:String=null)
+	public function NavigationControl(name:String)
 	{
 		_name = name;
-		this.instance = instance;
-		this.property = property;
-		this.heldValue = heldValue;
-		this.defaultValue = defaultValue;
-		this.urlUpdateEvent = urlUpdateEvent;
 	}
 	
 	private var _name:String;
