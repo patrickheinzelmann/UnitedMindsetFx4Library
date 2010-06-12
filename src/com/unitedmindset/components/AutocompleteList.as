@@ -83,7 +83,7 @@ package com.unitedmindset.components
 			addEventListener(IndexChangeEvent.CHANGE, _onList_ChangeHandler);
 			addEventListener(FocusEvent.FOCUS_IN, _onFocusIn);
 			addEventListener(FocusEvent.FOCUS_OUT, _onFocusOut);
-			addEventListener(KeyboardEvent.KEY_DOWN, _onKeyDown);
+			//addEventListener(KeyboardEvent.KEY_DOWN, _onKeyDown);
 		}
 
 		//---------------------------------------------------------------------
@@ -451,50 +451,50 @@ import com.unitedmindset.events.AutocompleteListTextEvent;
 			dispatchEvent(new DropDownEvent(DropDownEvent.CLOSE));
 		}
 		
-		/**
-		 * @private
-		 */
-		private function _onKeyDown(event:KeyboardEvent):void
-		{
-			if (event.keyCode == Keyboard.DOWN)
-			{
-				if(isDropDownOpen && selectedIndex<dataProvider.length)
-					selectedIndex++;
-				else
-					dropDownController.openDropDown();
-			}
-			else if (event.ctrlKey && event.keyCode == Keyboard.UP)
-			{
-				dropDownController.closeDropDown(true);
-			}    
-			else if (event.keyCode == Keyboard.UP)
-			{
-				if(isDropDownOpen && selectedIndex>0)
-					selectedIndex--;
-			}    
-			else if (event.keyCode == Keyboard.ENTER)
-			{
-				// Close the dropDown and eat the event if appropriate.
-				if (isDropDownOpen)
-				{
-					dropDownController.closeDropDown(true);
-					textInput.text = LabelUtil.itemToLabel(selectedItem, labelField, labelFunction);
-				}
-			}
-			else if (event.keyCode == Keyboard.ESCAPE)
-			{
-				// Close the dropDown and eat the event if appropriate.
-				if (isDropDownOpen)
-					dropDownController.closeDropDown(false);
-			}
-			event.preventDefault();
-		}
-		
 		//---------------------------------------------------------------------
 		//
 		//   Protected Methods
 		//
 		//---------------------------------------------------------------------
+		/**
+		 *  @private
+		 *  Build in basic keyboard navigation support in List. 
+		 */
+		override protected function keyDownHandler(event:KeyboardEvent):void
+		{
+			//if closed, open
+			if(event.keyCode == Keyboard.DOWN && !isDropDownOpen)
+			{
+				dropDownController.openDropDown();
+				return;
+			}
+			
+			//null check
+			if (!dataProvider || !layout)
+				return;
+			
+			if(event.ctrlKey && event.keyCode == Keyboard.UP && isDropDownOpen)
+			{
+				dropDownController.closeDropDown(true);
+				return;
+			}
+				
+			if(event.keyCode == Keyboard.ENTER && isDropDownOpen)
+			{
+				dropDownController.closeDropDown(true);
+				textInput.text = LabelUtil.itemToLabel(selectedItem, labelField, labelFunction);
+				return;
+			}
+			
+			if(event.keyCode == Keyboard.ESCAPE && isDropDownOpen)
+			{
+				dropDownController.closeDropDown(false);
+				return;
+			}
+			
+			adjustSelectionAndCaretUponNavigation(event);
+		}
+		
 		/**
 		 * If the textinput text length is greater than 0, 
 		 * open the list and run compare. If 0, close list and
