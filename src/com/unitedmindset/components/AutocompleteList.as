@@ -589,5 +589,31 @@ import com.unitedmindset.events.AutocompleteListTextEvent;
 			textInput.text = LabelUtil.itemToLabel((event.target as List).selectedItem, labelField, labelFunction);
 		}
 		
+		//---------------------------------------------------------------------
+		//
+		//   Static Methods
+		//
+		//---------------------------------------------------------------------
+		/**
+		 * Static function to filter no items. 
+		 * @param item
+		 * @return true
+		 * 
+		 */		
+		public static function filterNone(item:Object):Boolean
+		{
+			return true;
+		}
+		
+		/**
+		 * Static function to filter all items. 
+		 * @param item
+		 * @return false
+		 * 
+		 */		
+		public static function filterAll(item:Object):Boolean
+		{
+			return false;
+		}
 	}
 }
