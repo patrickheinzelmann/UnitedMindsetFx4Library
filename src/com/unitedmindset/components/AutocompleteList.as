@@ -240,12 +240,14 @@ package com.unitedmindset.components
 			if(value is ICollectionView)
 			{
 				super.dataProvider = value;
+				return;
 			}
 			
 			//make IList into ICollectionView
 			if(value is IList)
 			{
 				super.dataProvider = new ArrayCollection(value.toArray());
+				return;
 			}
 		}
 		
@@ -426,7 +428,6 @@ package com.unitedmindset.components
 			_bText = textInput.text;
 			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGE, text, event.bubbles, event.cancelable, event.operation));
 			invalidateList();
-			evaluateList();
 		}
 		
 		/**
@@ -594,10 +595,10 @@ package com.unitedmindset.components
 		{
 			var labelDisplay:String = LabelUtil.itemToLabel(item, compareLabel, null);
 			if(caseSensitive){
-				if(labelDisplay.indexOf(textInput.text)>-1)
+				if(labelDisplay.indexOf(text)>-1)
 					return true;
 			} else {
-				if(labelDisplay.toLowerCase().indexOf(textInput.text.toLowerCase())>-1)
+				if(labelDisplay.toLowerCase().indexOf(text.toLowerCase())>-1)
 					return true;
 			}
 			return false;
