@@ -12,6 +12,7 @@ package com.unitedmindset.components
 	import mx.collections.ICollectionView;
 	import mx.collections.IList;
 	import mx.collections.errors.ItemPendingError;
+	import mx.controls.Text;
 	import mx.events.FlexEvent;
 	import mx.events.ListEvent;
 	import mx.utils.ObjectUtil;
@@ -309,6 +310,29 @@ package com.unitedmindset.components
 				return false;
 		}
 		
+		//----------------------------------
+		//  text
+		//----------------------------------
+		private var _bText:String = "";
+		public function get text():String
+		{
+			if(textInput)
+				return textInput.text;
+			return _bText;
+		}
+		
+		public function set text(value:String):void
+		{
+			if(value==_bText)
+				return;
+			
+			if(textInput)
+			{
+				textInput.text = value;
+				textInput.dispatchEvent(new TextOperationEvent(TextOperationEvent.CHANGE, false, false));
+			}
+		}
+		
 		//---------------------------------------------------------------------
 		//
 		//   Override Methods
@@ -323,6 +347,7 @@ package com.unitedmindset.components
 			
 			if(instance == textInput)
 			{
+				textInput.text = _bText;
 				textInput.addEventListener(TextOperationEvent.CHANGE, _onTextInput_TextChange);
 				textInput.addEventListener(TextOperationEvent.CHANGING, _onTextInput_TextChanging);
 				textInput.addEventListener(FocusEvent.FOCUS_OUT, _onTextInput_FocusOutHandler);
@@ -352,8 +377,6 @@ package com.unitedmindset.components
 				textInput.removeEventListener(TextOperationEvent.CHANGE, _onTextInput_TextChange);
 				textInput.removeEventListener(FocusEvent.FOCUS_OUT, _onTextInput_FocusOutHandler);
 			}
-import com.unitedmindset.events.AutocompleteListTextEvent;
-
 		}
 		
 		/**
@@ -400,7 +423,8 @@ import com.unitedmindset.events.AutocompleteListTextEvent;
 		 */
 		private function _onTextInput_TextChange(event:TextOperationEvent):void
 		{
-			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGE, event.bubbles, event.cancelable, event.operation));
+			_bText = textInput.text;
+			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGE, text, event.bubbles, event.cancelable, event.operation));
 			invalidateList();
 			evaluateList();
 		}
@@ -410,7 +434,7 @@ import com.unitedmindset.events.AutocompleteListTextEvent;
 		 */		
 		private function _onTextInput_TextChanging(event:TextOperationEvent):void
 		{
-			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGING, event.bubbles, event.cancelable, event.operation));
+			dispatchEvent(new AutocompleteListTextEvent(AutocompleteListTextEvent.TEXT_CHANGING, text, event.bubbles, event.cancelable, event.operation));
 		}
 		
 		/**
@@ -451,6 +475,29 @@ import com.unitedmindset.events.AutocompleteListTextEvent;
 			dispatchEvent(new DropDownEvent(DropDownEvent.CLOSE));
 		}
 		
+		//---------------------------------------------------------------------
+		//
+		//   Public Methods
+		//
+		//---------------------------------------------------------------------
+		/**
+		 * Opens the drop down.
+		 */		
+		public function openDropDown():void
+		{
+			if(dropDownController)
+				dropDownController.openDropDown();
+		}
+		
+		/**
+		 * Closes the drop down.
+		 * @param commit to specify whether to commit the current selection or not
+		 */		
+		public function closeDropDown(commit:Boolean=false):void
+		{
+			if(dropDownController)
+				dropDownController.closeDropDown(commit);
+		}
 		//---------------------------------------------------------------------
 		//
 		//   Protected Methods

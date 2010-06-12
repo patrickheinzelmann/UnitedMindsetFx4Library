@@ -77,14 +77,21 @@ package com.unitedmindset.events
 		 */
 		public static const TEXT_CHANGE:String = "textChange";
 		
-		public function AutocompleteListTextEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=true, operation:FlowOperation=null)
+		private var _text:String;
+		public function get text():String
+		{
+			return _text;
+		}
+		
+		public function AutocompleteListTextEvent(type:String, text:String, bubbles:Boolean=false, cancelable:Boolean=true, operation:FlowOperation=null)
 		{
 			super(type, bubbles, cancelable, operation);
+			_text = text;
 		}
 		
 		override public function clone():Event
 		{
-			return new AutocompleteListTextEvent(type, bubbles, cancelable, operation);
+			return new AutocompleteListTextEvent(type, text, bubbles, cancelable, operation);
 		}
 	}
 }
