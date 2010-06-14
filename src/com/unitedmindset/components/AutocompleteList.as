@@ -531,6 +531,7 @@ package com.unitedmindset.components
 			{
 				dropDownController.closeDropDown(true);
 				textInput.text = LabelUtil.itemToLabel(selectedItem, labelField, labelFunction);
+				_bText = textInput.text;
 				return;
 			}
 			
@@ -552,7 +553,7 @@ package com.unitedmindset.components
 		{
 			if(!dataProvider)
 				return;
-			if(textInput.text.length>0)
+			if(text.length>0)
 			{
 				dropDownController.openDropDown();
 				runCompare();
