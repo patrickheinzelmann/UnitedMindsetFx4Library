@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:unitedmindset="library://ns.unitedmindset.com"
+			   creationComplete="application1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var dataProvider:ArrayCollection;
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var source:Array = [];
+				source.push({label:"Adult"});
+				source.push({label:"Aeroplane"});
+				source.push({label:"Air"});
+				source.push({label:"Aircraft Carrier"});
+				source.push({label:"Airforce"});
+				source.push({label:"Airport"});
+				source.push({label:"Album"});
+				source.push({label:"Alphabet"});
+				source.push({label:"Apple (is evil)"});
+				source.push({label:"Arm"});
+				source.push({label:"Army"});
+				source.push({label:"Baby"});
+				source.push({label:"Backpack"});
+				source.push({label:"Balloon"});
+				source.push({label:"Banana"});
+				source.push({label:"Bank"});
+				source.push({label:"Barbecue"});
+				source.push({label:"Bathroom"});
+				source.push({label:"Bathtub"});
+				source.push({label:"Bed"});
+				source.push({label:"Bee"});
+				source.push({label:"Bible"});
+				source.push({label:"Bird"});
+				source.push({label:"Bomb"});
+				source.push({label:"Book"});
+				source.push({label:"Boss"});
+				source.push({label:"Bottle"});
+				source.push({label:"Bowl"});
+				source.push({label:"Box"});
+				source.push({label:"Boy"});
+				source.push({label:"Brain"});
+				source.push({label:"Bridge"});
+				source.push({label:"Butterfly"});
+				source.push({label:"Button"});
+				source.push({label:"Cappuccino"});
+				source.push({label:"Car"});
+				source.push({label:"Car-race"});
+				source.push({label:"Carpet"});
+				source.push({label:"Carrot"});
+				source.push({label:"Cave"});
+				source.push({label:"Chair"});
+				source.push({label:"Chess Board"});
+				source.push({label:"Chief"});
+				source.push({label:"Child"});
+				source.push({label:"Chisel"});
+				source.push({label:"Chocolates"});
+				source.push({label:"Church"});
+				source.push({label:"Circle"});
+				source.push({label:"Circus"});
+				source.push({label:"Clock"});
+				source.push({label:"Clowns are scary"});
+				source.push({label:"Coffee"});
+				source.push({label:"Coffee-shop"});
+				source.push({label:"Comet"});
+				source.push({label:"Compact Disc"});
+				source.push({label:"Compass"});
+				source.push({label:"Computer"});
+				source.push({label:"Crystal"});
+				source.push({label:"Cup"});
+				source.push({label:"Cycle"});
+				source.push({label:"Data Base"});
+				source.push({label:"Desk"});
+				source.push({label:"Diamond"});
+				source.push({label:"Dress"});
+				source.push({label:"Drill"});
+				source.push({label:"Drink"});
+				source.push({label:"Drum"});
+				source.push({label:"Dung"});
+				source.push({label:"Ears"});
+				source.push({label:"Earth"});
+				source.push({label:"Egg"});
+				source.push({label:"Electricity"});
+				source.push({label:"Elephant"});
+				source.push({label:"Eraser"});
+				source.push({label:"Explosive"});
+				source.push({label:"Eyes"});
+				source.push({label:"Family"});
+				source.push({label:"Fan"});
+				source.push({label:"Feather"});
+				source.push({label:"Festival"});
+				source.push({label:"Film"});
+				source.push({label:"Finger"});
+				source.push({label:"Fire"});
+				source.push({label:"Floodlight"});
+				source.push({label:"Flower"});
+				source.push({label:"Foot"});
+				source.push({label:"Fork"});
+				source.push({label:"Freeway"});
+				source.push({label:"Fruit"});
+				source.push({label:"Fungus"});
+				source.push({label:"Game"});
+				source.push({label:"Garden"});
+				source.push({label:"Gas"});
+				source.push({label:"Gate"});
+				source.push({label:"Gemstone"});
+				source.push({label:"Girl"});
+				source.push({label:"Gloves"});
+				source.push({label:"God"});
+				source.push({label:"Grapes"});
+				source.push({label:"Guitar"});
+				source.push({label:"Hammer"});
+				source.push({label:"Hat"});
+				source.push({label:"Hieroglyph"});
+				source.push({label:"Highway"});
+				source.push({label:"Horoscope"});
+				source.push({label:"Horse"});
+				source.push({label:"Hose"});
+				source.push({label:"Ice"});
+				source.push({label:"Ice-cream"});
+				source.push({label:"Insect"});
+				source.push({label:"Jet fighter"});
+				source.push({label:"Junk"});
+				source.push({label:"Kaleidoscope"});
+				source.push({label:"Kitchen"});
+				source.push({label:"Knife"});
+				source.push({label:"Leather jacket"});
+				source.push({label:"Leg"});
+				source.push({label:"Library"});
+				source.push({label:"Liquid"});
+				source.push({label:"Magnet"});
+				source.push({label:"Man"});
+				source.push({label:"Map"});
+				source.push({label:"Maze"});
+				source.push({label:"Meat"});
+				source.push({label:"Meteor"});
+				source.push({label:"Microscope"});
+				source.push({label:"Milk"});
+				source.push({label:"Milkshake"});
+				source.push({label:"Mist"});
+				source.push({label:"Money $$$$"});
+				source.push({label:"Monster"});
+				source.push({label:"Mosquito"});
+				source.push({label:"Mouth"});
+				source.push({label:"Nail"});
+				source.push({label:"Navy"});
+				source.push({label:"Necklace"});
+				source.push({label:"Needle"});
+				source.push({label:"Onion"});
+				source.push({label:"PaintBrush"});
+				source.push({label:"Pants"});
+				source.push({label:"Parachute"});
+				source.push({label:"Passport"});
+				source.push({label:"Pebble"});
+				source.push({label:"Pendulum"});
+				source.push({label:"Pepper"});
+				source.push({label:"Perfume"});
+				source.push({label:"Pillow"});
+				source.push({label:"Plane"});
+				source.push({label:"Planet"});
+				source.push({label:"Pocket"});
+				source.push({label:"Post-office"});
+				source.push({label:"Potato"});
+				source.push({label:"Printer"});
+				source.push({label:"Prison"});
+				source.push({label:"Pyramid"});
+				source.push({label:"Radar"});
+				source.push({label:"Rainbow"});
+				source.push({label:"Record"});
+				source.push({label:"Restaurant"});
+				source.push({label:"Rifle"});
+				source.push({label:"Ring"});
+				source.push({label:"Robot"});
+				source.push({label:"Rock"});
+				source.push({label:"Rocket"});
+				source.push({label:"Roof"});
+				source.push({label:"Room"});
+				source.push({label:"Rope"});
+				source.push({label:"Saddle"});
+				source.push({label:"Salt"});
+				source.push({label:"Sandpaper"});
+				source.push({label:"Sandwich"});
+				source.push({label:"Satellite"});
+				source.push({label:"School"});
+				source.push({label:"Sex"});
+				source.push({label:"Ship"});
+				source.push({label:"Shoes"});
+				source.push({label:"Shop"});
+				source.push({label:"Shower"});
+				source.push({label:"Signature"});
+				source.push({label:"Skeleton"});
+				source.push({label:"Slave"});
+				source.push({label:"Snail"});
+				source.push({label:"Software"});
+				source.push({label:"Solid"});
+				source.push({label:"Space Shuttle"});
+				source.push({label:"Spectrum"});
+				source.push({label:"Sphere"});
+				source.push({label:"Spice"});
+				source.push({label:"Spiral"});
+				source.push({label:"Spoon"});
+				source.push({label:"Sports-car"});
+				source.push({label:"Spot Light"});
+				source.push({label:"Square"});
+				source.push({label:"Staircase"});
+				source.push({label:"Star"});
+				source.push({label:"Stomach"});
+				source.push({label:"Sun"});
+				source.push({label:"Sunglasses"});
+				source.push({label:"Surveyor"});
+				source.push({label:"Swimming Pool"});
+				source.push({label:"Sword"});
+				source.push({label:"Table"});
+				source.push({label:"Tapestry"});
+				source.push({label:"Teeth"});
+				source.push({label:"Telescope"});
+				source.push({label:"Television"});
+				source.push({label:"Tennis racquet"});
+				source.push({label:"Thermometer"});
+				source.push({label:"Tiger"});
+				source.push({label:"Toilet"});
+				source.push({label:"Tongue"});
+				source.push({label:"Torch"});
+				source.push({label:"Torpedo"});
+				source.push({label:"Train"});
+				source.push({label:"Treadmill"});
+				source.push({label:"Triangle"});
+				source.push({label:"Tunnel"});
+				source.push({label:"Typewriter"});
+				source.push({label:"Umbrella"});
+				source.push({label:"Unitedmindset"});
+				source.push({label:"Vacuum"});
+				source.push({label:"Vampire"});
+				source.push({label:"Videotape"});
+				source.push({label:"Vulture"});
+				source.push({label:"Water"});
+				source.push({label:"Weapon"});
+				source.push({label:"Web"});
+				source.push({label:"Wheelchair"});
+				source.push({label:"Window"});
+				source.push({label:"Woman"});
+				source.push({label:"Worm"});
+				source.push({label:"X-ray"});
+				dataProvider = new ArrayCollection(source);
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20"/>
+	</s:layout>
+	<unitedmindset:AutocompleteList dataProvider="{dataProvider}"/>
+</s:Application>
