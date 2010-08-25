@@ -166,12 +166,12 @@ POSSIBILITY OF SUCH DAMAGE.
 			
 			if(hostComponent.text=="")
 			{
-				bcolor = getStyle("textInputPromptingBackgroundColor");
-				alpha = getStyle("textInputPromptingBackgroundAlpha");
-				color = getStyle("textInputPromptingColor");
+				bcolor = (getStyle("textInputPromptingBackgroundColor"))?getStyle("textInputPromptingBackgroundColor"):0xDEDEDE;
+				alpha = (getStyle("textInputPromptingBackgroundAlpha"))?getStyle("textInputPromptingBackgroundAlpha"):1;
+				color = (getStyle("textInputPromptingColor"))?getStyle("textInputPromptingColor"):0x000000;
 			} else {
 				bcolor = (getStyle("backgroundColor"))?getStyle("backgroundColor"):0xFFFFFF;
-				alpha = (getStyle("backgroundAlpha"))?getStyle("backgroundAlpha"):1;
+				alpha = (getStyle("backgroundAlpha"))?getStyle("backgroundAlpha"):0;
 				color = (getStyle("color"))?getStyle("color"):0x000000;
 			}
 			
