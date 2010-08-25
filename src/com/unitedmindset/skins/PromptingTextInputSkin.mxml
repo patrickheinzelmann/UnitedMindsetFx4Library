@@ -53,6 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
     
     <fx:Script fb:purpose="styling">
         private var paddingChanged:Boolean;
+		private var promptingChanged:Boolean;
         
         /* Define the skin elements that should not be colorized. */
         static private const exclusions:Array = ["background", "textDisplay"];
@@ -64,7 +65,7 @@ POSSIBILITY OF SUCH DAMAGE.
         
         /* Define the content fill items that should be colored by the "contentBackgroundColor" style. */
         static private const contentFill:Array = ["bgFill"];
-
+		
         /**
          *  @private
          */
@@ -82,6 +83,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 updatePadding();
                 paddingChanged = false;
             }
+			
+			updatePromptingColoring();
         }
         
         /**
@@ -146,6 +149,34 @@ POSSIBILITY OF SUCH DAMAGE.
             if (textDisplay.getStyle("paddingBottom") != padding)
                 textDisplay.setStyle("paddingBottom", padding);
         }
+		
+		private function  updatePromptingColoring():void
+		{
+			if(!textDisplay)
+				return;
+			
+			var bcolor:uint;
+			var alpha:Number;
+			var color:uint;
+			
+			if(hostComponent.text=="")
+			{
+				bcolor = getStyle("textInputPromptingBackgroundColor");
+				alpha = getStyle("textInputPromptingBackgroundAlpha");
+				color = getStyle("textInputPromptingColor");
+			} else {
+				bcolor = (getStyle("backgroundColor"))?getStyle("backgroundColor"):0xFFFFFF;
+				alpha = (getStyle("backgroundAlpha"))?getStyle("backgroundAlpha"):1;
+				color = (getStyle("color"))?getStyle("color"):0x000000;
+			}
+			
+			if(textDisplay.getStyle("backgroundColor") != bcolor)
+				textDisplay.setStyle("backgroundColor",bcolor);
+			if(textDisplay.getStyle("backgroundAlpha") != alpha)
+				textDisplay.setStyle("backgroundAlpha",alpha);
+			if(textDisplay.getStyle("color") != color)
+				textDisplay.setStyle("color",color);
+		}
         
         /**
          *  @private
@@ -160,8 +191,12 @@ POSSIBILITY OF SUCH DAMAGE.
             {
                 paddingChanged = true;
                 invalidateProperties();
-            }
+            } else if(allStyles || styleProp.indexOf("textInputPrompting")==0)
+			{
+				invalidateProperties();
+			}
         }
+
     </fx:Script>
     
     <fx:Script>
@@ -216,6 +251,6 @@ POSSIBILITY OF SUCH DAMAGE.
     <s:RichEditableText id="textDisplay"
               verticalAlign="middle"
               widthInChars="10"
-              left="1" right="1" top="1" bottom="1" backgroundColor.promptedStates="#D3D3D3"/>
+              left="1" right="1" top="1" bottom="1"/>
 
 </s:SparkSkin>

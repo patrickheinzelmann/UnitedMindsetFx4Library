@@ -37,10 +37,50 @@ package com.unitedmindset.components
 	import spark.components.supportClasses.SkinnableTextBase;
 	import spark.events.TextOperationEvent;
 	
+	//--------------------------------------
+	//  Styles
+	//--------------------------------------
+	/**
+	 *  The background color of the textInput when prompting.
+	 * 
+	 *  @langversion 3.0
+	 *  @playerversion Flash 10
+	 *  @playerversion AIR 1.5
+	 *  @productversion Flex 4
+	 */
+	[Style(name="textInputPromptingBackgroundColor", type="uint", format="Color", inherit="yes")]
+	/**
+	 *  The background alpha of the textInput when prompting.
+	 * 
+	 *  @langversion 3.0
+	 *  @playerversion Flash 10
+	 *  @playerversion AIR 1.5
+	 *  @productversion Flex 4
+	 */
+	[Style(name="textInputPromptingBackgroundAlpha", type="Number", inherit="no", minValue="0.0", maxValue="1.0")]
+	
+	/**
+	 *  The text color of the textInput when prompting.
+	 * 
+	 *  @langversion 3.0
+	 *  @playerversion Flash 10
+	 *  @playerversion AIR 1.5
+	 *  @productversion Flex 4
+	 */
+	[Style(name="textInputPromptingColor", type="uint", format="Color", inherit="yes")]
+	
+	//--------------------------------------
+	//  Events
+	//--------------------------------------
+	
 	/**
 	 * Fired when the prompt changes. 
 	 */
 	[Event(name="promptChange",type="flash.events.Event")]
+	
+	//--------------------------------------
+	//  States
+	//--------------------------------------
 	
 	[SkinState("normalAndPrompted")]
 	[SkinState("disabledAndPrompted")]
@@ -182,6 +222,13 @@ package com.unitedmindset.components
 				return super.getCurrentSkinState()+"AndPrompted";
 			else
 				return super.getCurrentSkinState();
+		}
+		
+		override public function invalidateSkinState():void
+		{
+			super.invalidateSkinState();
+			if(skin)
+				skin.invalidateProperties();
 		}
 		//---------------------------------------------------------------------
 		//
