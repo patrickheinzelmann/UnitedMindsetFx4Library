@@ -59,7 +59,7 @@ POSSIBILITY OF SUCH DAMAGE.
         override public function get colorizeExclusions():Array {return exclusions;}
         
         /* Define the content fill items that should be colored by the "contentBackgroundColor" style. */
-        static private const contentFill:Array = ["bgFill"];
+        static private const contentFill:Array = [];
         
         /**
          *  @private
@@ -89,7 +89,6 @@ POSSIBILITY OF SUCH DAMAGE.
                 verticalAlignChanged = false;
             }
 			
-			updatePromptingColoring();
         }
         
         /**
@@ -124,7 +123,10 @@ POSSIBILITY OF SUCH DAMAGE.
             borderStroke.color = getStyle("borderColor");
             borderStroke.alpha = getStyle("borderAlpha");
             
-            super.updateDisplayList(unscaledWidth, unscaledHeight);
+			updatePromptingColoring();
+            
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			
         }
         
         /**
@@ -155,30 +157,26 @@ POSSIBILITY OF SUCH DAMAGE.
                 textDisplay.setStyle("paddingBottom", padding);
         }
 		
-		private function  updatePromptingColoring():void
+		private function updatePromptingColoring():void
 		{
 			if(!textDisplay)
 				return;
-			
-			var bcolor:uint;
-			var alpha:Number;
-			var color:uint;
-			
-			if(hostComponent.text=="")
+			//get styles
+			var bcolor:uint = getStyle("contentBackgroundColor");
+			var balpha:Number = getStyle("contentBackgroundAlpha");
+			var color:uint = getStyle("color");
+			//if prompting change colors
+			if(hostComponent.text == "")
 			{
-				bcolor = (getStyle("textInputPromptingBackgroundColor"))?getStyle("textInputPromptingBackgroundColor"):0xDEDEDE;
-				alpha = (getStyle("textInputPromptingBackgroundAlpha"))?getStyle("textInputPromptingBackgroundAlpha"):1;
-				color = (getStyle("textInputPromptingColor"))?getStyle("textInputPromptingColor"):0x000000;
-			} else {
-				bcolor = (getStyle("backgroundColor"))?getStyle("backgroundColor"):0xFFFFFF;
-				alpha = (getStyle("backgroundAlpha"))?getStyle("backgroundAlpha"):0;
-				color = (getStyle("color"))?getStyle("color"):0x000000;
+				color = getStyle("promptColor");
+				bcolor = getStyle("promptBackgroundColor");
+				balpha = getStyle("promptBackgroundAlpha");
 			}
-			
-			if(textDisplay.getStyle("backgroundColor") != bcolor)
-				textDisplay.setStyle("backgroundColor",bcolor);
-			if(textDisplay.getStyle("backgroundAlpha") != alpha)
-				textDisplay.setStyle("backgroundAlpha",alpha);
+			//set
+			if(bgFill.color != bcolor)
+				bgFill.color = bcolor;
+			if(bgFill.alpha != balpha)
+				bgFill.alpha = balpha;
 			if(textDisplay.getStyle("color") != color)
 				textDisplay.setStyle("color",color);
 		}

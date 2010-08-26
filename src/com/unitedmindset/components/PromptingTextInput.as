@@ -48,7 +48,7 @@ package com.unitedmindset.components
 	 *  @playerversion AIR 1.5
 	 *  @productversion Flex 4
 	 */
-	[Style(name="textInputPromptingBackgroundColor", type="uint", format="Color", inherit="yes")]
+	[Style(name="promptBackgroundColor", type="uint", format="Color", inherit="yes")]
 	/**
 	 *  The background alpha of the textInput when prompting.
 	 * 
@@ -57,7 +57,7 @@ package com.unitedmindset.components
 	 *  @playerversion AIR 1.5
 	 *  @productversion Flex 4
 	 */
-	[Style(name="textInputPromptingBackgroundAlpha", type="Number", inherit="no", minValue="0.0", maxValue="1.0")]
+	[Style(name="promptBackgroundAlpha", type="Number", inherit="yes", minValue="0.0", maxValue="1.0")]
 	
 	/**
 	 *  The text color of the textInput when prompting.
@@ -67,7 +67,7 @@ package com.unitedmindset.components
 	 *  @playerversion AIR 1.5
 	 *  @productversion Flex 4
 	 */
-	[Style(name="textInputPromptingColor", type="uint", format="Color", inherit="yes")]
+	[Style(name="promptColor", type="uint", format="Color", inherit="yes")]
 	
 	//--------------------------------------
 	//  Events
@@ -228,7 +228,7 @@ package com.unitedmindset.components
 		{
 			super.invalidateSkinState();
 			if(skin)
-				skin.invalidateProperties();
+				skin.invalidateDisplayList();
 		}
 		//---------------------------------------------------------------------
 		//

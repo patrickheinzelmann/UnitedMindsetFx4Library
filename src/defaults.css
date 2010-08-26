@@ -36,10 +36,16 @@ unitedmindset|AutocompleteList
 
 unitedmindset|PromptingTextArea
 {
+	promptColor: #333333;
+	promptBackgroundColor: #FFFFFF;
+	promptBackgroundAlpha: 1.0;
 	skinClass: ClassReference("com.unitedmindset.skins.PromptingTextAreaSkin");
 }
 
 unitedmindset|PromptingTextInput
 {
+	promptColor: #333333;
+	promptBackgroundColor: #FFFFFF;
+	promptBackgroundAlpha: 1.0;
 	skinClass: ClassReference("com.unitedmindset.skins.PromptingTextInputSkin");
 }
